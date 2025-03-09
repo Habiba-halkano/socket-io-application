@@ -29,7 +29,7 @@ const PollForm = () => {
       console.log("Poll Created:", response.data);
       setMessage("Poll created successfully!");
       setQuestion("");
-      setOptions([{ option: "", votes: 0 }, { option: "", votes: 0 }]); // Reset form after submission
+      setOptions([{ option: "", votes: 0 }, { option: "", votes: 0 }])
     } catch (error) {
       console.error("Error creating poll:", error);
       setMessage("Error creating poll. Try again.");

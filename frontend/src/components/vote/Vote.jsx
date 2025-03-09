@@ -28,7 +28,7 @@ const Vote = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Vote on a Poll</h2>
+      <h2 className={styles.title}>Vote on a Poll</h2>
 
       <select className={styles.select} onChange={(e) => setSelectedPoll(e.target.value)} defaultValue="">
         <option value="" disabled>Select a Poll</option>
@@ -40,12 +40,13 @@ const Vote = () => {
       {selectedPoll && (
         <div className={styles.options}>
           {polls.find(p => p._id === selectedPoll)?.options.map((option, index) => (
-            <label key={index}>
+            <label key={index} className={styles.optionLabel}>
               <input
                 type="radio"
                 name="pollOption"
                 value={option.option}
                 onChange={(e) => setSelectedOption(e.target.value)}
+                className={styles.radioInput}
               />
               {option.option}
             </label>

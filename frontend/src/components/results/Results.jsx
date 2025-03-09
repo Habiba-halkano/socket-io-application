@@ -28,7 +28,6 @@ const Results = () => {
 
     socket.on("pollResults", (updatedPolls) => {
       console.log("Received updated polls:", updatedPolls);
-
       setResults(updatedPolls);
     });
 
@@ -39,13 +38,13 @@ const Results = () => {
 
   return (
     <div className={styles.resultsContainer}>
-      <h2>Live Results</h2>
+      <h2 className={styles.title}>Live Results</h2>
       {results.length === 0 ? (
-        <p>No results to display yet.</p>
+        <p className={styles.noResults}>No results to display yet.</p>
       ) : (
         results.map((poll) => (
           <div key={poll._id} className={styles.poll}>
-            <h3>{poll.question}</h3>
+            <h3 className={styles.pollQuestion}>{poll.question}</h3>
             {poll.options.map((option, index) => (
               <p key={index} className={styles.option}>
                 {option.option}: {option.votes} votes
