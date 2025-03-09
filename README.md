@@ -11,7 +11,7 @@ A simple live polling system with real-time vote updates using the MERN Stack an
 - WebSocket integration using Socket.io
 
 ## Tech Stack
-- **Frontend**: React.js, Chart.js, Tailwind CSS
+- **Frontend**: React.js, Chart.js, CSS Modules
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **WebSockets**: Socket.io
@@ -22,7 +22,7 @@ A simple live polling system with real-time vote updates using the MERN Stack an
 3. Run backend and frontend
 - Ensure MongoDB is running.
 - Start the backend server first, then the frontend.
-- Open `http://localhost:3000` in your browser.
+- Open `http://localhost:5000` in your browser.
 
 ## Usage
 1. Users can vote in real-time.
