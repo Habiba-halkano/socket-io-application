@@ -8,14 +8,32 @@ const Results = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    console.log("Connecting to socket..."); // Debug log
-    socket.on("pollResults", (updatedResults) => {
-      console.log("Received updated results:", updatedResults); // Debug log
-      setResults(updatedResults); // Update the state with the new poll results
+    console.log("Connecting to socket...");
+
+    const fetchInitialPolls = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/polls");
+        const data = await response.json();
+        setResults(data);
+      } catch (error) {
+        console.error("Error fetching initial polls:", error);
+      }
+    };
+
+    fetchInitialPolls();
+
+    socket.on("connect", () => {
+      console.log("Socket connected:", socket.id);
+    });
+
+    socket.on("pollResults", (updatedPolls) => {
+      console.log("Received updated polls:", updatedPolls);
+
+      setResults(updatedPolls);
     });
 
     return () => {
-      socket.off("pollResults"); // Clean up on unmount
+      socket.off("pollResults");
     };
   }, []);
 

@@ -14,13 +14,11 @@ const PollForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate question and options
     if (!question.trim() || options.some(opt => !opt.option.trim())) {
       setMessage("Question and options cannot be empty.");
       return;
     }
 
-    // Prepare the poll data for submission
     const pollData = {
       question,
       options: options.map(opt => ({ option: opt.option.trim(), votes: 0 })),

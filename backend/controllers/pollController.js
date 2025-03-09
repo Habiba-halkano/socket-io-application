@@ -1,4 +1,5 @@
 const Poll = require("../models/Poll");
+const io = require("../sockets/socket.js");
 
 // Create a new poll
 const createPoll = async (req, res) => {
@@ -45,12 +46,15 @@ const votePoll = async (req, res) => {
       return res.status(404).json({ message: "Poll not found" });
     }
 
-    if (!poll.options.includes(option)) {
+    if (!poll.options.some(o => o.option === option)) {
       return res.status(400).json({ message: "Invalid option" });
     }
 
-    poll.votes[option] = (poll.votes[option] || 0) + 1;
+    const optionIndex = poll.options.findIndex(opt => opt.option === option);
+    poll.options[optionIndex].votes += 1;
     await poll.save();
+
+    io.emit("pollUpdated", poll);
 
     res.json(poll);
   } catch (error) {
