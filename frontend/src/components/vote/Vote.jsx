@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styles from "./Vote.module.css";
 
 const Vote = () => {
   const [polls, setPolls] = useState([]);
@@ -8,8 +9,10 @@ const Vote = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/polls")
-      .then(response => setPolls(response.data))
-      .catch(error => console.error("Error fetching polls:", error));
+      .then((response) => {
+        setPolls(response.data);
+      })
+      .catch((error) => console.error("Error fetching polls:", error));
   }, []);
 
   const handleVote = async () => {
@@ -24,31 +27,30 @@ const Vote = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2>Vote on a Poll</h2>
-      <select onChange={(e) => setSelectedPoll(e.target.value)} defaultValue="">
+
+      <select className={styles.select} onChange={(e) => setSelectedPoll(e.target.value)} defaultValue="">
         <option value="" disabled>Select a Poll</option>
         {polls.map((poll) => (
-          <option key={poll._id} value={poll._id}>
-            {poll.question}
-          </option>
+          <option key={poll._id} value={poll._id}>{poll.question}</option>
         ))}
       </select>
 
       {selectedPoll && (
-        <div>
+        <div className={styles.options}>
           {polls.find(p => p._id === selectedPoll)?.options.map((option, index) => (
             <label key={index}>
               <input
                 type="radio"
                 name="pollOption"
-                value={option}
+                value={option.option}
                 onChange={(e) => setSelectedOption(e.target.value)}
               />
-              {option}
+              {option.option}
             </label>
           ))}
-          <button onClick={handleVote} disabled={!selectedOption}>
+          <button className={styles.button} onClick={handleVote} disabled={!selectedOption}>
             Submit Vote
           </button>
         </div>

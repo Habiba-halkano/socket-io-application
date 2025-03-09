@@ -1,0 +1,30 @@
+.container {
+  text-align: center;
+  margin: 20px auto;
+  width: 400px;
+}
+
+.select {
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.options label {
+  display: block;
+  margin: 5px 0;
+}
+
+.button {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

@@ -25,18 +25,24 @@ router.get("/", async (req, res) => {
 });
 
 // Update vote count
-router.put("/:id/vote", async (req, res) => {
+router.post("/:id/vote", async (req, res) => {
     try {
-        const { optionIndex } = req.body;
+        const { option } = req.body;
         const poll = await Poll.findById(req.params.id);
         if (!poll) return res.status(404).json({ message: "Poll not found" });
 
-        poll.options[optionIndex].votes += 1;
+        const optionToUpdate = poll.options.find(opt => opt.option === option);
+
+        if (!optionToUpdate) {
+            return res.status(400).json({ message: "Option not found" });
+        }
+
+        optionToUpdate.votes += 1;
         await poll.save();
 
         res.json(poll);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: "Error submitting vote: " + error.message });
     }
 });
 

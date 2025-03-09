@@ -1,7 +1,7 @@
 import React from "react";
-import PollForm from "../components/PollForm";
-import Vote from "../components/Vote";
-import Results from "../components/Results";
+import PollForm from "../components/pollform/PollForm.jsx";
+import Vote from "../components/vote/Vote.jsx";
+import Results from "../components/results/Results.jsx";
 
 const Home = () => {
   return (
