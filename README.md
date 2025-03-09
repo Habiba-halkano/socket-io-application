@@ -27,5 +27,5 @@ A simple live polling system with real-time vote updates using the MERN Stack an
 ## Usage
 1. Users can vote in real-time.
 2. Results update instantly without page refresh.
-3. Vote distribution is visualized using a bar chart.
+
 
